@@ -1,0 +1,1 @@
+-- this is intended to prevent the automatic health script from spawning
