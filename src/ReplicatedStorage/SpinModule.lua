@@ -5,11 +5,11 @@ local module = {
 		["Rewards"] = {
 			["Spectacular"] = { ["Rarity"] = 8 },
 			["Black Spectacular"] = { ["Rarity"] = 8 },
-			["Comic Pages"] = { ["Rarity"] = 21 },
-			["Nothing"] = { ["Rarity"] = 18 },
-			["X2 Comic Pages"] = { ["Rarity"] = 7 },
-			["Cash"] = { ["Rarity"] = 21 },
-			["Spin"] = { ["Rarity"] = 10 },
+			["1k Cash"] = { ["Rarity"] = 21 },
+			["10k Cash"] = { ["Rarity"] = 18 },
+			["50k Cash"] = { ["Rarity"] = 7 }, --X2 comic pages
+			["5k Cash"] = { ["Rarity"] = 21 },
+			["Spin"] = { ["Rarity"] = 10 }, 
 			["X2 Cash"] = { ["Rarity"] = 7 },
 		},
 	},

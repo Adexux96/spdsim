@@ -27,6 +27,8 @@ local function updateTimeForReward(player)
 	if not nextSpinTimestamp or nextSpinTimestamp < getCurrentTimestamp() then
 		nextSpinTimestamp = getCurrentTimestamp() + SpinModule.Spin.SpinTimeForReward
 		DS:SetAsync("NextSpinTime"..player.UserId, nextSpinTimestamp)
+		Spin.Value += 1
+        DS:SetAsync("Spin"..player.UserId, Spin.Value)
 	end
 	
 	SpinTime.Value = getTimeRemaining(nextSpinTimestamp)
@@ -46,21 +48,20 @@ local function updateTimeForReward(player)
 end
 
 local function PlayerRemoved(Player)
-	local leaderstats = Player:WaitForChild("leaderstats")
-	
 	DS:SetAsync("SpinTime"..Player.UserId, Player.leaderstats.spins.SpinTime.Value)
 	DS:SetAsync("Spin"..Player.UserId, Player.leaderstats.spins.Spins.Value)
+	DS:SetAsync("Spectacular"..Player.UserId, Player.leaderstats.skins.Spectacular.Unlocked.Value)
+	DS:SetAsync("Black Spectacular"..Player.UserId, Player.leaderstats.skins["Black Spectacular"].Unlocked.Value)
 end
 
 local function SpinEventFire(Player, SpinReward)
 	local leaderstats = Player:WaitForChild("leaderstats")
-	local temp = leaderstats:WaitForChild("temp")
 	local skins = leaderstats:WaitForChild("skins")
 	local spins = leaderstats:WaitForChild("spins")
 	local Spin = spins:WaitForChild("Spins")
 	if Spin.Value >= 1 then
 		Spin.Value -= 1
-		local reward = SpinReward
+		print(SpinReward)
 		if SpinReward == "Spectacular" then
 			
 			local spectacular = skins:WaitForChild("Spectacular")
@@ -81,16 +82,14 @@ local function SpinEventFire(Player, SpinReward)
 			
 			spectacular.Unlocked.Value = true
 			
-		elseif SpinReward == "Cash" then
+		elseif SpinReward == "1k Cash" then
 			
-			local earningBoost = temp.EarningsBoost
-			
-			leaderstats.Cash.Value+= (earningBoost.Value * 1000) + 1000
+			leaderstats.Cash.Value+= 1000
 						
-		elseif SpinReward == "Comic Pages" then
+		elseif SpinReward == "10k Cash" then
 			
-			leaderstats["Comic pages"].Value+= 1000
-						
+			leaderstats.Cash.Value+= 10000
+									
 		elseif SpinReward == "Spin" then
 			
 			Spin.Value+= 1
@@ -99,9 +98,13 @@ local function SpinEventFire(Player, SpinReward)
 			
 		leaderstats.CashBoost.duration.Value+=600	
 						
-		elseif SpinReward == "X2 Comic Pages" then
+		elseif SpinReward == "5k Cash" then
 			
-		leaderstats.ComicPagesBoost.duration.Value+=600
+			leaderstats.Cash.Value+= 5000
+
+		elseif SpinReward == "50k Cash" then
+			
+			leaderstats.Cash.Value+= 50000
 						
 		end
 	end

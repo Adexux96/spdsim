@@ -1,23 +1,26 @@
 local MarketplaceService = game:GetService("MarketplaceService")
 local Player = game:GetService("Players").LocalPlayer
-local TweenService = game:GetService("TweenService")
+local leaderstats = Player:WaitForChild("leaderstats")
+local spins = leaderstats:WaitForChild("spins")
+local SpinStats = spins:WaitForChild("Spins")
 
-for i,v in pairs(script.Parent:WaitForChild("ButtonX1"):GetChildren()) do
-	if v:IsA("ImageButton") then
-		v.MouseButton1Click:Connect(function()
+local button = script.Parent:WaitForChild("Button"):WaitForChild("ImageButton")
+local connection
 
-			local ID = v:WaitForChild("ID")
-			MarketplaceService:PromptProductPurchase(Player,ID.Value)
-		end)
-		
-		for i,v in pairs(script.Parent:WaitForChild("ButtonX10"):GetChildren()) do
-			if v:IsA("ImageButton") then
-				v.MouseButton1Click:Connect(function()
-
-					local ID = v:WaitForChild("ID")
-					MarketplaceService:PromptProductPurchase(Player,ID.Value)
-				end)
-			end
-		end
-	end
+local function buySpin()
+    local ID = button:WaitForChild("ID")
+    MarketplaceService:PromptProductPurchase(Player, ID.Value)
 end
+
+local function updateConnection()
+    if SpinStats.Value == 0 and not connection then
+        connection = button.Activated:Connect(buySpin)
+    elseif SpinStats.Value > 0 and connection then
+        connection:Disconnect()
+        connection = nil
+    end
+end
+
+updateConnection()
+
+SpinStats.Changed:Connect(updateConnection)

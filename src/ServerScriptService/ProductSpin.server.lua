@@ -14,16 +14,6 @@ productFunctions[2662726640] = function(receipt, player)
 	end
 end
 
-productFunctions[2662731939] = function(receipt, player)
-	local leaderstats = player.leaderstats
-	local spin = leaderstats.spins.Spins
-
-	if spin then
-		spin.Value += 10
-		return true
-	end
-end
-
 local function processReceipt(receiptInfo)
 	local userId = receiptInfo.PlayerId
 	local productId = receiptInfo.ProductId

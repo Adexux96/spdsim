@@ -17,7 +17,7 @@ local Animation2 = TweenService:Create(script.Parent.Parent:WaitForChild("spinsU
 	Rotation = 0
 })
 
-script.Parent.container.outer["6spins"].bg.spinOpen.MouseButton1Click:Connect(function()
+script.Parent.container.inner["6spins"].bg.spinOpen.Activated:Connect(function()
 	if Debounce then
 		Debounce = false
 
