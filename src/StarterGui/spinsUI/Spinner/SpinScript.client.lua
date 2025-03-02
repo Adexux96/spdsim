@@ -2,6 +2,12 @@ local Spin = script.Parent:WaitForChild("Spin")
 local SpinButton = script.Parent:WaitForChild("Button"):WaitForChild("ImageButton")
 local TweenService = game:GetService("TweenService")
 
+-- Add UIAspectRatioConstraint
+local aspectRatio = Instance.new("UIAspectRatioConstraint")
+aspectRatio.AspectRatio = 1 -- 1:1 ratio since it's a circular spinner
+aspectRatio.DominantAxis = Enum.DominantAxis.Width
+aspectRatio.Parent = script.Parent
+
 local SpinEvent = game:GetService("ReplicatedStorage"):WaitForChild("Spin")
 
 local SpinModule = require(game:GetService("ReplicatedStorage"):WaitForChild("SpinModule"))
